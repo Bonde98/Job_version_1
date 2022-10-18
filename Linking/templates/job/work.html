@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block contenu %}
+
+<h1 class="text-center"> Bienvenue dans la page de Travaille</h1>
+<form action="" method="post">
+        {% csrf_token %}
+         <p> {{ work_form.as_p }}</p>
+        <button type="submit">Enregistrer</button>
+</form>
+
+{% endblock %}

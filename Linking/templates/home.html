@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block contenu %}
+
+<h1 class="text-center"> Bienvenue dans la page d'accueil</h1>
+{% if user.is_authenticated %}
+ <p class="text-center">Vous ètes connecter en tan que : {{ user.username }} </p>
+<p> <a class="text-center" href="{% url 'logout' %}"> se deconnecter</a> </p>
+{% else %}
+<p class="text-center"><a href="{% url 'login' %}">se connecter</a> </p>
+{% endif %}
+
+{% if user.WORKER %}
+{% for profile in profiles %}
+ {{ message }}
+ {{ profile.username }}
+{{ profile.email }}
+{{ profile.role }}
+ <p class="text-center"><a href="{% url 'detail_profile' profile.id %}">Mon Profile</a> </p>
+
+{% endfor %}
+{% endif %}
+
+<p><a href="{% url 'workers_views' %}"> Les ouvriers </a> </p>
+
+
+
+{% endblock %}

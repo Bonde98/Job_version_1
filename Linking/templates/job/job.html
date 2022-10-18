@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+{% block contenu %}
+
+    <h1>Bienvenue dans la pge de creation Job</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+     <p>  {{ job_create.as_p }} </p>
+    </form>
+
+
+{% endblock %}

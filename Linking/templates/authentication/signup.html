@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+
+{% block contenu %}
+    <h1> Page de Connexion </h1>
+<form action="" method="post" class=" col-md-5 mx-auto" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="card-title">
+        Inscription
+        <div class="card-body">
+              {{ form.as_p }}
+        </div>
+
+    </div>
+
+
+    <button type="submit">S'inscrire</button>
+</form>
+
+<div class="form-group">
+<label>Votre Email</label>
+<div class="input-with-icon">
+<input type="email" name="email" class="form-control" placeholder="Votre email" value="" required>
+<i class="ti-user"></i>
+</div>
+</div>
+<div class="form-group">
+<label>Mot de passe</label>
+<div class="input-with-icon">
+<input type="password" name="password" class="form-control" placeholder="*******" required>
+<i class="ti-unlock"></i>
+</div>
+</div>
+<div class="my-2">
+<div class="g-recaptcha" data-sitekey="6Lexgl0aAAAAAFO2fDBKyvvOSvSjdekNH9ZiBI5R"></div>
+</div>
+<div class="form-group">
+<button type="submit" class="btn btn-md full-width theme-bg text-white">Me connecter</button>
+</div>
+</div>
+<div class="rcs_log_125 pt-2 pb-3">
+<span>Ou Me connecter avec</span>
+</div>
+
+{% endblock %}

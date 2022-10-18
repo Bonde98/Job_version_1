@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block contenu %}
+    <p class="text-center"> <a href="{% url 'home' %}" > Accueil </a> </p>
+    <h1> La pages des Ouvriers </h1>
+        <div class="text-center">
+             {% for worker in workers  %}
+        <p> {{ worker.ouvrier }} </p>
+
+
+         <p> {{ worker.bio }} </p>
+        <p> {{ worker.home_adress }} </p>
+            <p class="text-center"><a href="{% url 'worker_detail' worker.id %}"> Voir  </a> </p>
+
+         {% endfor %}
+
+        </div>
+
+{% endblock %}

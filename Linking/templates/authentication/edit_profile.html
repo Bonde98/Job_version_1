@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+
+{% block contenu %}
+    <h1> Bienvenue dans la modifier ton profile</h1>
+    <h2> Modifier ton Profile </h2>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+        {{ edit_profile.as_p }}
+
+        <button type="submit">Enregistrer</button>
+        </form>
+        <hr>
+        <h3> Vous voulez supprimer ton Profile ?</h3>
+        <form action="" method="post" enctype="multipart/form-data" class="text-center">
+            {% csrf_token %}
+            {{ delete_profile }}
+
+        <button type="submit">Supprimer</button>
+        </form>
+
+{% endblock %}
