@@ -1,8 +1,4 @@
-{% extends 'base.html' %}
-
-
-{% block contenu %}
-<h1> la page de detail d'un Ouvrier </h1>
+<h1> la page de detail d'un Ouvrier hey  </h1>
 
     <div class="text-center">
         <p> {{ work.metier }} </p>
@@ -11,12 +7,7 @@
     <p> {{ work.adress_home }} </p>
     <p> {{ work.zone_de_deplacement }} </p>
     <p> {{ work.jour_de_travaille }} </p>
-        {% if work.ouvrier == user %}
+        {% if perms.change_worker and work.ouvrier == user %}
         <p><a href="{% url 'worker_edit_and_delete' work.id %}"> Modifier Travailleur</a> </p>
         {% endif %}
     </div>
-
-<h1> {{ user }} </h1>
-
-
-{% endblock %}

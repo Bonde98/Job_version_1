@@ -6,6 +6,7 @@
 <h1 class="text-center"> Bienvenue dans la page de Travaille</h1>
 <form action="" method="post">
         {% csrf_token %}
+    {{ message }}
          <p> {{ work_form.as_p }}</p>
         <button type="submit">Enregistrer</button>
 </form>

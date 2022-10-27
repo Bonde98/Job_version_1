@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import  AbstractUser
+from django.contrib.auth.models import  AbstractUser, Group
 # Create your models here.
 
 
@@ -35,7 +35,16 @@ class User(AbstractUser):
     sexe = models.CharField(max_length=30,choices=SEXE_CHOICES,verbose_name='Sexe')
     role = models.CharField(max_length=30,choices=ROLE_CHOICES,verbose_name='Role')
 
-    def __str__(self):
-        return self.username
+    # def __str__(self):
+    #     return self.username
 
+    # Nouvelle methode save
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.role == self.WORKER:
+            group = Group.objects.get(name='workers')
+            group.user_set.add(self)
+        elif self.role == self.SUBSCRIBER:
+            group = Group.objects.get(name='subscribers')
+            group.user_set.add(self)
 

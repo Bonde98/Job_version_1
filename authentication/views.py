@@ -29,23 +29,6 @@ class LoginPage(View):
             return render(request,self.template_name, {'form': form, 'message': message})
 
 
-# Connexion
-def Login(request):
-    form = LoginForm()
-    message = ''
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            user = authenticate(
-                username=form.cleaned_data['username'],
-                password=form.cleaned_data['password'])
-            if user is not None:
-                login(request,user)
-                return redirect('home')
-            else:
-                 message = f"Identification invalide "
-    return render(request,"authentication/login.html",{'form':form,'message':message})
-
 # Déconnexion
 def logout_page(request):
     logout(request)
@@ -59,7 +42,10 @@ def sigup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect("home")
+            if user.role == "WORKER":
+                return redirect("worker")
+            else:
+                return redirect('home')
     context = {'form':form}
     return  render(request,"authentication/signup.html",context)
 
@@ -70,6 +56,7 @@ def sigup(request):
 #Détail d'un profil
 def detail_profile(request,id):
     profile = get_object_or_404(User,id=id)
+
     context = {'profile': profile}
     return  render(request,"authentication/profile_detail.html",context)
 
@@ -95,3 +82,8 @@ def edit_profile(request,profile_id):
                "delete_profile": delete_profile
                }
     return  render(request,"authentication/edit_profile.html",context)
+
+
+def work(request):
+    work = "Bonjour"
+    return render(request,"authentication/profile_detail.html",{'work':work})

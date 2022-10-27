@@ -12,18 +12,26 @@
 {% endif %}
 
 {% if user.WORKER %}
+
 {% for profile in profiles %}
+
  {{ message }}
  {{ profile.username }}
 {{ profile.email }}
 {{ profile.role }}
+{% if profile.username == user.username %}
  <p class="text-center"><a href="{% url 'detail_profile' profile.id %}">Mon Profile</a> </p>
 
+{% else %}
+<p class="text-center"><a href="{% url 'detail_profile' profile.id %}">Regarder le Profile</a> </p>
+{% endif %}
+
+
 {% endfor %}
+
 {% endif %}
 
 <p><a href="{% url 'workers_views' %}"> Les ouvriers </a> </p>
-
 
 
 {% endblock %}

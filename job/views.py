@@ -60,7 +60,8 @@ def edit_or_delete_worker(request, work_id):
 @login_required
 def views_worker(request,id):
     work = get_object_or_404(Worker,id=id)
-    return render(request,"job/work_detail.html",{'work':work})
+
+    return render(request,"job/work_detail.html",{'work':work,})
 
 
 #Vue pour les travailleur

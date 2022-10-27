@@ -4,13 +4,13 @@
 {% block contenu %}
     <h1> Modifier profil Travailleur  </h1>
 <a href="{% url 'home' %}"> Accueil </a>
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ edit_worker.as_p }}
     <button type="submit">Enregistrer</button>
 </form>
 <hr>
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <p> {{ delete_worker.as_p }}</p>
     <button type="submit">Supprimer</button>

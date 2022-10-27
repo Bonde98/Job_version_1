@@ -9,20 +9,31 @@
 
         <p class="text-center"> {{ profile.username }} </p> <br>
         <p class="text-center"> {{ profile.email }} </p> <br>
-        {% if user.profile_photo %}
-        <p class="text-center"> <img src="{{ user.profile_photo.url }}">  </p> <br>
+        {% if profile.profile_photo %}
+        <p class="text-center"> <img src="{{ profile.profile_photo.url }}" >  </p> <br>
         {% else %}
 
         <p class="text-center"> <img src="" alt="Pas de photo profile">  </p> <br>
         {% endif %}
         <p class="text-center"> {{ profile.sexe }} </p> <br>
-        <p class="text-center"> {{ profile.home_adress }} </p> <br>
+        <p class="text-center"> {{ profile.adress_home }} </p> <br>
 
+{% if profile.username == user.username %}
 <p> <a href="{% url 'edit_profile' profile.id %}">Modifier Le profile</a> </p>
-
-{% if perms.add_worker %}
-<p class="text-center"><a href="{% url 'worker_detail' profile.id %}"> Voir mon  Boulot </a> </p>
-
 {% endif %}
+
+
+{% if profile.username == user.username %}
+<p class="text-center"><a href="{% url 'password_change' %}"> Changer mon mot de passe </a> </p>
+{% endif %}
+
+
+
+
+ {% if perms.job.change_worker and profile.username == user.username %}
+        <p><a href="{% url 'worker_edit_and_delete' profile.id %}"> Modifier Travailleur</a> </p>
+
+        {% endif %}
+
 
 {% endblock %}

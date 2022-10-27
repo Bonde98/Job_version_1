@@ -34,6 +34,8 @@ def create_groups(apps, schema_migration):
         if user.role == 'SUBSCRIBER':
             subscribers.user_set.add(user)
 
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -41,5 +43,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(create_groups)
+        migrations.RunPython(create_groups),
     ]

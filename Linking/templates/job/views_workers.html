@@ -6,15 +6,20 @@
     <h1> La pages des Ouvriers </h1>
         <div class="text-center">
              {% for worker in workers  %}
-        <p> {{ worker.ouvrier }} </p>
 
+         <h1>  {{ worker.ouvrier }}</h1>
 
          <p> {{ worker.bio }} </p>
         <p> {{ worker.home_adress }} </p>
-            <p class="text-center"><a href="{% url 'worker_detail' worker.id %}"> Voir  </a> </p>
+            {% if user == worker.ouvrier %}
+            <p class="text-center"><a href="{% url 'worker_detail' worker.id %}"> Voir Mon profile </a> </p>
+            {% else %}
+            <p class="text-center"><a href="{% url 'worker_detail' worker.id %}"> Voir le profile travailleur </a> </p>
 
+            {% endif %}
          {% endfor %}
 
         </div>
+
 
 {% endblock %}
