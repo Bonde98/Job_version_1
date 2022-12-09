@@ -2,22 +2,26 @@
 
 
 {% block contenu %}
-    <p class="text-center"> <a href="{% url 'home' %}" > Accueil </a> </p>
+    <p class="text-center"> <a href="{% url 'job:home' %}" > Accueil </a> </p>
     <h1> La pages des Ouvriers </h1>
         <div class="text-center">
+            <!-- {% if user.is_authenticated %} -->
              {% for worker in workers  %}
 
-         <h1>  {{ worker.ouvrier }}</h1>
+         <h1>  {{ worker.ouvrier }}</h1> 
 
          <p> {{ worker.bio }} </p>
         <p> {{ worker.home_adress }} </p>
             {% if user == worker.ouvrier %}
-            <p class="text-center"><a href="{% url 'worker_detail' worker.id %}"> Voir Mon profile </a> </p>
+            <p class="text-center"><a href="{% url 'job:worker_detail' worker.id %}"> Voir Mon profile </a> </p>
             {% else %}
-            <p class="text-center"><a href="{% url 'worker_detail' worker.id %}"> Voir le profile travailleur </a> </p>
+            <p class="text-center"><a href="{% url 'job:worker_detail' worker.id %}"> Voir le profile travailleur </a> </p>
 
             {% endif %}
          {% endfor %}
+         <!-- {% else %}
+         <h1>Pas de Travailleur Pour l'instant</h1>
+         {% endif %} -->
 
         </div>
 

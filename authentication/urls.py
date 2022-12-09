@@ -3,6 +3,7 @@ from .views import sigup, logout_page,LoginPage, detail_profile, edit_profile
 # Import les
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 
+app_name = 'authentication'
 
 urlpatterns = [
     path("login/",LoginPage.as_view(),name="login"),

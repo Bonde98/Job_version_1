@@ -19,19 +19,19 @@
         <p class="text-center"> {{ profile.adress_home }} </p> <br>
 
 {% if profile.username == user.username %}
-<p> <a href="{% url 'edit_profile' profile.id %}">Modifier Le profile</a> </p>
+<p> <a href="{% url 'authentication:edit_profile' profile.id %}">Modifier Le profile</a> </p>
 {% endif %}
 
 
 {% if profile.username == user.username %}
-<p class="text-center"><a href="{% url 'password_change' %}"> Changer mon mot de passe </a> </p>
+<p class="text-center"><a href="{% url 'authentication:password_change' %}"> Changer mon mot de passe </a> </p>
 {% endif %}
 
 
 
 
  {% if perms.job.change_worker and profile.username == user.username %}
-        <p><a href="{% url 'worker_edit_and_delete' profile.id %}"> Modifier Travailleur</a> </p>
+        <p><a href="{% url 'job:worker_detail' profile.id %}"> Modifier Travailleur</a> </p>
 
         {% endif %}
 

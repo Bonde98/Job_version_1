@@ -11,8 +11,9 @@
     <p> {{ work.adress_home }} </p>
     <p> {{ work.zone_de_deplacement }} </p>
     <p> {{ work.jour_de_travaille }} </p>
+        <p> {{ work.etoile }} </p>
         {% if work.ouvrier == user %}
-        <p><a href="{% url 'worker_edit_and_delete' work.id %}"> Modifier Travailleur</a> </p>
+        <p><a href="{% url 'job:worker_edit_and_delete' work.id %}"> Modifier Travailleur</a> </p>
         {% endif %}
     </div>
 

@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'authentication',
-    'job',
+    'authentication.apps.AuthenticationConfig',
+    'job.apps.JobConfig',
 ]
 
 MIDDLEWARE = [
@@ -82,6 +82,17 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+#         'NAME': 'mvp',         # Or path to database file if using sqlite3.
+#         'USER': 'mvp',                      # Not used with sqlite3.
+#         'PASSWORD': 'badiane99',                  # Not used with sqlite3.
+#         'HOST': 'localhost',                      # Set to empty string for localhost. Not used with sqlite3.
+#         'PORT': '8000',                      # Set to empty string for default. Not used with sqlite3.
+#     }
+# }
+   
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -136,9 +147,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 #Restreint les accées aux utilisateurs non connecter
-LOGIN_URL = 'login'
+LOGIN_URL = 'authentication:login'
 # C'est ajouter pour rediriger l'utilisateur sur home
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'job:home'
 # C'est ajouter pour rediriger l'utilisateur Deconnecter sur home
 LOGOUT_REDIRECT_URL = LOGIN_URL
 

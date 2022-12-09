@@ -8,7 +8,7 @@ class WorkerForm(forms.ModelForm):
 
     class Meta:
         model = Worker
-        fields = ['metier','bio','adress_home','contact','zone_de_deplacement','jour_de_travaille']
+        fields = ['metier','bio','adress_home','contact','zone_de_deplacement','jours_de_travaille','etoile','heures_de_travaille']
 
 
 class DeleteWorkerForm(forms.Form):

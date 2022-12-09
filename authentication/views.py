@@ -32,7 +32,7 @@ class LoginPage(View):
 # Déconnexion
 def logout_page(request):
     logout(request)
-    return redirect('home')
+    return redirect('job:home')
 
 # Insriptions
 def sigup(request):
@@ -43,9 +43,9 @@ def sigup(request):
             user = form.save()
             login(request, user)
             if user.role == "WORKER":
-                return redirect("worker")
+                return redirect("job:worker")
             else:
-                return redirect('home')
+                return redirect('job:home')
     context = {'form':form}
     return  render(request,"authentication/signup.html",context)
 
@@ -71,13 +71,13 @@ def edit_profile(request,profile_id):
             edit_profile = SignupForm(request.POST,request.FILES,instance=profile)
             if edit_profile.is_valid():
                edit_profile.save()
-               return redirect('home')
+               return redirect('job:home')
     if request.method == 'POST':
         if "delete_profile" in request.POST:
             delete_profile = DeleteProfileForm(request.POST)
             if delete_profile.is_valid():
                 profile.delete()
-                return redirect("home")
+                return redirect("job:home")
     context = {'edit_profile': edit_profile,
                "delete_profile": delete_profile
                }

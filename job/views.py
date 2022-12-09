@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from authentication.models import User
 from .forms import WorkerForm, DeleteWorkerForm
-from .models import Worker,Metier
+from .models import Worker,Metier  
 
 from django.contrib.auth.decorators import login_required, permission_required
 
@@ -23,7 +23,7 @@ def worker(request):
            work = work_form.save(commit=False)
            work.ouvrier = request.user
            work.save()
-           return redirect("home")
+           return redirect("job:home")
         else:
             message = "Vous n'ètes pas Ouvrier pour avoir accées à cet page"
     context = {
@@ -43,12 +43,12 @@ def edit_or_delete_worker(request, work_id):
             edit_worker = WorkerForm(request.POST,instance=worker)
             if edit_worker.is_valid():
                 edit_worker.save()
-                return redirect("workers_views")
+                return redirect("job:workers_views")
         if "delete_worker" in request.POST:
             delete_worker = DeleteWorkerForm(request.POST)
             if delete_worker.is_valid():
                 worker.delete()
-                return redirect("workers_views")
+                return redirect("job:workers_views")
 
     context = {
         "edit_worker":edit_worker,
