@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import  AbstractUser, Group
+from job.models import  Worker
 # Create your models here.
 
 
@@ -34,6 +35,7 @@ class User(AbstractUser):
     #numbers = models.CharField(unique=True,max_length=9,verbose_name='Numéro Téléphone')
     sexe = models.CharField(max_length=30,choices=SEXE_CHOICES,verbose_name='Sexe')
     role = models.CharField(max_length=30,choices=ROLE_CHOICES,verbose_name='Role')
+
 
     # def __str__(self):
     #     return self.username

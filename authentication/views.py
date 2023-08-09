@@ -4,6 +4,7 @@ from .forms import LoginForm, SignupForm, DeleteProfileForm
 from django.views.generic import View
 from django.conf import settings
 from .models import User
+from job.models import  Worker
 
 
 # Connexion en mode class
@@ -57,7 +58,9 @@ def sigup(request):
 def detail_profile(request,id):
     profile = get_object_or_404(User,id=id)
 
-    context = {'profile': profile}
+    work = get_object_or_404(Worker, id=id)
+    context = {'profile': profile,
+               'work': work}
     return  render(request,"authentication/profile_detail.html",context)
 
 

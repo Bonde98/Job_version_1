@@ -10,6 +10,42 @@
     <title>Mise en relation</title>
 </head>
 <body>
+
+    <div class="list" 
+        style=" border: none;
+        color: white;
+        background-color: #333;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;"
+    >
+        <h3 id="title-nav"><a href="{% url 'job:home' %}">Our Products </a></h3>
+        <ul style=" display: flex; justify-content: flex-end;">
+            <li style="list-style: none; padding: 1rem; "><a style="text-decoration: none; " href="{% url 'job:home' %}">A Propos</a></li>
+
+            <li style="list-style: none; padding: 1rem;"><a href="#">Nous Contacter</a></li>
+            {% if user.is_authenticated %}
+
+             <li>
+                  {% if user.profile_photo %}
+                 <img src="{{ user.profile_photo.url }}" width="40">
+                 {% else %}
+                 <h4>Pas de photo</h4>
+                 {% endif %}
+                 <p class="text-center">@{{ user.username }} </p>
+
+                   {% if user.username == user.username %}
+                      <p class="text-center"><a href="{% url 'authentication:detail_profile' user.id %}">Settings</a> </p>
+                     {% endif %}
+
+            <p> <a class="text-center" href="{% url 'authentication:logout' %}"> se deconnecter</a> </p>
+            {% else %}
+            <p class="text-center"><a href="{% url 'authentication:login' %}">se connecter</a> </p>
+             </li>
+            {% endif %}
+
+        </ul>
+    </div>
     {% block contenu %}
 
 

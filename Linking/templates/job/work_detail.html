@@ -15,6 +15,24 @@
         {% if work.ouvrier == user %}
         <p><a href="{% url 'job:worker_edit_and_delete' work.id %}"> Modifier Travailleur</a> </p>
         {% endif %}
+
+        <!-- LIKES -->
+{% if user.is_authenticated %}
+  <form action="{% url 'job:worker_like' work.id %}" method="POST">
+    {% csrf_token %}
+
+    {% if liked %}
+    <button type="submit" name="work_id" value="{{work.id}}" class="btn btn-info">Unlike</button>
+    {% else %}
+    <button type="submit" name="work_id" value="{{work.id}}" class="btn btn-info">Like</button>
+    {% endif %}
+  </form>
+{% else %}
+  <a class="btn btn-outline-info" href="{% url 'login' %}?next={{request.path}}">Log in to like this article!</a><br>
+{% endif %}
+    <strong class="text-secondary">Like{{ work.likes.count }}</strong>
+<!--<strong class="text-secondary">{{ number_of_likes }} Like{{ number_of_likes|pluralize }}</strong>-->
+
     </div>
 
 <h1> {{ user }} </h1>

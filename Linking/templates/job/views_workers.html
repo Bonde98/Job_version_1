@@ -2,15 +2,39 @@
 
 
 {% block contenu %}
-    <p class="text-center"> <a href="{% url 'job:home' %}" > Accueil </a> </p>
-    <h1> La pages des Ouvriers </h1>
-        <div class="text-center">
+
+<style>
+    .home{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+    }
+</style>
+
+    <section class="home-ouvriers">
+
+        <h1> La pages des Ouvriers </h1>
+        <div class="metier">
+          <h3>All Metier</h3>
+          <p>{{ metiers.count }}</p>
+         {% for metier in metiers %}
+         <div>
+           {{ metier.nom_du_metier }}
+         </div>
+
+          {% endfor %}
+
+        </div>
+
+        </div>
+        <div class="ouvriers">
+            <div class="text-center">
             <!-- {% if user.is_authenticated %} -->
              {% for worker in workers  %}
-
-         <h1>  {{ worker.ouvrier }}</h1> 
+         <img src="{{ worker.ouvrier.profile_photo.url }}" width="70">
+         <h1>  {{ worker.ouvrier }}</h1>
 
          <p> {{ worker.bio }} </p>
+            <p> {{ worker.jours_de_travaille }} </p>
         <p> {{ worker.home_adress }} </p>
             {% if user == worker.ouvrier %}
             <p class="text-center"><a href="{% url 'job:worker_detail' worker.id %}"> Voir Mon profile </a> </p>
@@ -24,6 +48,11 @@
          {% endif %} -->
 
         </div>
+
+        </div>
+
+    </section>
+
 
 
 {% endblock %}

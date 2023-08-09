@@ -1,35 +1,63 @@
 {% extends 'base.html' %}
 
-
 {% block contenu %}
 
+<style>
+    .home-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+</style>
+
 <h1 class="text-center"> Bienvenue dans la page d'accueil</h1>
-{% if user.is_authenticated %}
- <p class="text-center">Vous ètes connecter en tan que : {{ user.username }} </p>
-<p> <a class="text-center" href="{% url 'authentication:logout' %}"> se deconnecter</a> </p>
-{% else %}
-<p class="text-center"><a href="{% url 'authentication:login' %}">se connecter</a> </p>
-{% endif %}
 
-{% if user.WORKER %}
+ <section class="home-container">
 
-{% for profile in profiles %}
+     <div class="metier">
+      <h3><a href="{% url 'job:home' %}">All Metier</a> </h3>
+      <p>{{ metiers.count }}</p>
+     {% for metier in metiers %}
+     <div>
+         <a href="{% url 'job:home' %}?q={{metier.nom_du_metier}}">{{ metier.nom_du_metier }}</a>
+     </div>
 
- {{ message }}
- {{ profile.username }}
-{{ profile.email }}
-{{ profile.role }}
-{% if profile.username == user.username %}
- <p class="text-center"><a href="{% url 'authentication:detail_profile' profile.id %}">Mon Profile</a> </p>
+      {% endfor %}
+        <p><a href="{% url 'job:workers_views' %}"> Plus </a> </p>
+    </div>
 
-{% else %}
-<p class="text-center"><a href="{% url 'authentication:detail_profile' profile.id %}">Regarder le Profile</a> </p>
-{% endif %}
+    <div>
+     {% if user.WORKER %}
 
-{% endfor %}
+        {% for worker in workers %}
+        <div>
+             {% if user.profile_photo %}
+             <img src="{{ worker.ouvrier.profile_photo.url }}" width="70">
+             {% else %}
+             <h4>Pas de photo</h4>
+             {% endif %}
+            @{{ worker.ouvrier }}
+            {{ worker.metier }}
+            {{ worker.jours_de_travaille }}
 
-{% endif %}
+
+         {% if user == worker.ouvrier %}
+        <p class="text-center"><a href="{% url 'job:worker_detail' worker.id %}"> Voir Mon profile </a> </p>
+        {% else %}
+        <p class="text-center"><a href="{% url 'job:worker_detail' worker.id %}"> Voir le profile travailleur </a> </p>
+
+        {% endif %}
+
+        </div>
+        {% endfor %}
+     {% endif %}
+    </div>
+
+
+
+  <div>
+ <h3>Recent activity</h3>
+  </div>
 
 <p><a href="{% url 'job:workers_views' %}"> Les ouvriers </a> </p>
-
+ </section>
 {% endblock %}

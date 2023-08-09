@@ -10,7 +10,7 @@
         <p class="text-center"> {{ profile.username }} </p> <br>
         <p class="text-center"> {{ profile.email }} </p> <br>
         {% if profile.profile_photo %}
-        <p class="text-center"> <img src="{{ profile.profile_photo.url }}" >  </p> <br>
+        <p class="text-center"> <img src="{{ profile.profile_photo.url }}" width="200">  </p> <br>
         {% else %}
 
         <p class="text-center"> <img src="" alt="Pas de photo profile">  </p> <br>
@@ -30,9 +30,12 @@
 
 
 
- {% if perms.job.change_worker and profile.username == user.username %}
-        <p><a href="{% url 'job:worker_detail' profile.id %}"> Modifier Travailleur</a> </p>
+        {{ work.ouvrier }}
+        {{ work.metier }}
 
+ {% if perms.job.change_worker and profile.username == user.username %}
+        <!-- <p><a href="{% url 'job:worker_detail' profile.id %}"> Modifier Travailleur</a> </p> -->
+        <p><a href="{% url 'job:worker_edit_and_delete' work.id %}"> Modifier Travailleur</a> </p>
         {% endif %}
 
 
